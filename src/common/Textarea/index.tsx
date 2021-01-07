@@ -58,6 +58,7 @@ export default function Textarea({
   return (
     <StyledTextarea
       ref={textareaRef}
+      cols={30}
       maxLength={1000}
       rows={rows}
       onChange={handleChange}

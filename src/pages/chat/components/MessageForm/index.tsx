@@ -42,7 +42,7 @@ export default function MessageForm({ onSubmit }: Props) {
             <Box mr="0.5rem">
               <Field name="isPrivate">
                 {({ field }: FieldProps) => (
-                  <Checkbox {...field}>
+                  <Checkbox {...field} aria-label="private message">
                     {field.value ? (
                       <PrivateIcon
                         aria-hidden="true"
@@ -81,6 +81,7 @@ export default function MessageForm({ onSubmit }: Props) {
                       rows={1}
                       maxRows={6}
                       onKeyDown={onEnterPress}
+                      aria-label="enter your message"
                     />
                   )
                 }}

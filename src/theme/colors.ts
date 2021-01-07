@@ -1,6 +1,6 @@
 const colors = {
-  BRAND_PRIMARY: "#4ED1B2",
-  BRAND_SECONDARY: "#FFDA00",
+  BRAND_PRIMARY: "#00917F",
+  BRAND_SECONDARY: "#FFC200",
   GREY: {
     1000: "#333333",
     900: "#5E5E5E",

@@ -99,6 +99,7 @@ export default function Chat() {
             onChange={handleSearchChange}
             type="search"
             placeholder="Rechercher un contact"
+            aria-label="search"
           />
         </SearchBar>
         <ConversationList>

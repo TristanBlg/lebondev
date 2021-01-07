@@ -16,7 +16,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     background-color: ${(props) => props.theme.colors.BACKGROUND};
     margin: 0;
-    font-family: 'Roboto', arial, sans-serif;
+    font-family: 'Roboto', sans-serif;
   }
   ul {
     list-style: none;
