@@ -1,15 +1,15 @@
 import React from "react"
 
 import Badge from "../../../../common/Badge"
-import * as T from "../../../../@types/global"
+import { ConversationType } from "../../../../@types/global"
 import { Container } from "./styledComponents"
 import { Text } from "../../../../common/StyledText"
 import Box from "../../../../common/Box"
 
 interface Props {
-  conversation: T.Conversation
+  conversation: ConversationType
   isActive: boolean
-  onClick: Function
+  onClick: () => void
 }
 
 export default function ConversationItem({
@@ -18,7 +18,7 @@ export default function ConversationItem({
   onClick,
 }: Props) {
   return (
-    <Container isActive={isActive} onClick={() => onClick()}>
+    <Container isActive={isActive} onClick={onClick}>
       <Box flexShrink={0}>
         <Badge
           pictures={conversation.members.map(
@@ -26,7 +26,7 @@ export default function ConversationItem({
           )}
         />
       </Box>
-      <Box minWidth="0" ml="1rem">
+      <Box minWidth="0" ml="1rem" display={["none", "none", "block"]}>
         <Text oneLineText>
           {conversation.members.map((member) => member.name).join(", ")}
         </Text>

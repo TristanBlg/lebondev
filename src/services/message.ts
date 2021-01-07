@@ -1,9 +1,14 @@
-import { Conversation, Member, Message, MessageList } from "../@types/global"
+import {
+  ConversationType,
+  MemberType,
+  MessageType,
+  MessageListType,
+} from "../@types/global"
 
 import { conversations } from "./__fixtures__/conversations"
 import { messages } from "./__fixtures__/messages"
 
-export function getConversations(): Promise<Conversation[]> {
+export function getConversations(): Promise<ConversationType[]> {
   // return axios.get();
 
   return new Promise((resolve) =>
@@ -13,7 +18,7 @@ export function getConversations(): Promise<Conversation[]> {
   )
 }
 
-export function getMessages(id: string): Promise<MessageList> {
+export function getMessages(id: string): Promise<MessageListType> {
   // return axios.get('');
 
   return new Promise((resolve) =>
@@ -25,11 +30,11 @@ export function getMessages(id: string): Promise<MessageList> {
 }
 
 export async function sendMessage(
-  memberID: Member["id"],
-  date: Message["date"],
-  text: Message["text"],
-  isPrivate: Message["isPrivate"]
-): Promise<Message> {
+  memberID: MemberType["id"],
+  date: MessageType["date"],
+  text: MessageType["text"],
+  isPrivate: MessageType["isPrivate"]
+): Promise<MessageType> {
   // const { data } = await axios.post('', { memberID, date, text, isPrivate });
 
   return new Promise((resolve) =>

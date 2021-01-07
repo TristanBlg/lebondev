@@ -1,13 +1,14 @@
 import React from "react"
 
+import { MessageType } from "../../../../@types/global"
+import { Container, MessageContainer } from "./styledComponents"
+import Box from "../../../../common/Box"
 import Message from "../../../../common/Message"
 import Badge from "../../../../common/Badge"
-import * as T from "../../../../@types/global"
-import { Container } from "./styledComponents"
-import Box from "../../../../common/Box"
+import { Text } from "../../../../common/StyledText"
 
 interface Props {
-  message: T.Message
+  message: MessageType
 }
 
 export default function MessageItem({ message }: Props) {
@@ -18,11 +19,18 @@ export default function MessageItem({ message }: Props) {
           <Badge size="small" pictures={[message.member.profilePictureUrl]} />
         </Box>
       )}
-      <Message
-        text={message.text}
-        outgoing={message.outgoing}
-        isPrivate={message.isPrivate}
-      />
+      <MessageContainer outgoing={message.outgoing}>
+        {!message.outgoing && (
+          <Text mb="0.5rem" light fontSize="0.75rem">
+            {message.member.name}
+          </Text>
+        )}
+        <Message
+          text={message.text}
+          outgoing={message.outgoing}
+          isPrivate={message.isPrivate}
+        />
+      </MessageContainer>
     </Container>
   )
 }

@@ -1,15 +1,19 @@
 import styled, { css } from "styled-components"
 
+import { HEADER_HEIGHT } from "../../constants"
+
 import { ReactComponent as Chat } from "./chat.svg"
 import { ReactComponent as Home } from "./home.svg"
 
 export const Container = styled.header`
   padding: 2rem 2rem 1rem;
+  height: ${HEADER_HEIGHT};
   border-bottom: 1px solid ${(props) => props.theme.colors.MUTED};
 `
 export const Navbar = styled.nav`
   display: flex;
   justify-content: space-between;
+  align-items: flex-end;
 `
 export const Nav = styled.ul`
   display: flex;

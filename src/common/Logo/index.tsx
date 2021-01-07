@@ -1,7 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 
-export const Container = styled.header`
+export const Container = styled.div`
   font-size: 1.5rem;
   font-weight: 700;
   color: ${(props) => props.theme.colors.BRAND_PRIMARY};

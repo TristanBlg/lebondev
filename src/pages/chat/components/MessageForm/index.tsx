@@ -1,12 +1,12 @@
 import React from "react"
 import { Field, FieldProps, Formik, FormikErrors } from "formik"
 
-import Input from "../../../../common/Input"
+import Textarea from "../../../../common/Textarea"
 import Box from "../../../../common/Box"
 import Checkbox from "../../../../common/Checkbox"
 
-import { ReactComponent as PublicIcon } from "../../public.svg"
-import { ReactComponent as PrivateIcon } from "../../private.svg"
+import { ReactComponent as PublicIcon } from "./public.svg"
+import { ReactComponent as PrivateIcon } from "./private.svg"
 
 interface Props {
   onSubmit: Function
@@ -29,12 +29,14 @@ export default function MessageForm({ onSubmit }: Props) {
         onSubmit(text, isPrivate)
 
         setSubmitting(false)
+
+        // Reset Text value only
         resetForm({
           values: { text: "", isPrivate },
         })
       }}
     >
-      {({ values, handleChange, handleBlur, handleSubmit }) => (
+      {({ handleSubmit }) => (
         <form onSubmit={handleSubmit}>
           <Box display="flex" alignItems="center">
             <Box mr="0.5rem">
@@ -57,15 +59,32 @@ export default function MessageForm({ onSubmit }: Props) {
               </Field>
             </Box>
             <Box flex="1">
-              <Input
-                type="text"
-                name="text"
-                required
-                placeholder="Écrivez votre message"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.text}
-              />
+              <Field name="text">
+                {({
+                  field,
+                  form: { submitForm, isSubmitting },
+                }: FieldProps) => {
+                  // Submit the form by pressing Enter
+                  const onEnterPress = (e: any) => {
+                    if (e.keyCode === 13 && e.shiftKey === false) {
+                      e.preventDefault()
+                      submitForm()
+                    }
+                  }
+
+                  return (
+                    <Textarea
+                      {...field}
+                      required
+                      placeholder="Écrivez votre message"
+                      isSubmitting={isSubmitting}
+                      rows={1}
+                      maxRows={6}
+                      onKeyDown={onEnterPress}
+                    />
+                  )
+                }}
+              </Field>
             </Box>
           </Box>
         </form>

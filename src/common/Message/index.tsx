@@ -11,7 +11,12 @@ interface Props {
 export default function Message({ text, outgoing, isPrivate }: Props) {
   return (
     <Container isPrivate={isPrivate} outgoing={outgoing}>
-      {text}
+      {text.split("\n").map((item, i) => (
+        <span key={i}>
+          {item}
+          <br />
+        </span>
+      ))}
     </Container>
   )
 }

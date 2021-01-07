@@ -1,37 +1,38 @@
-export interface Message {
+import { BreakpointsArray } from "../theme/breakpoints"
+export interface MessageType {
   date: string
   id: string
   isPrivate: boolean
   text: string
   outgoing: boolean
-  member: Member
+  member: MemberType
 }
 
 export interface ContextType {
   authenticated: boolean
-  user: Member
+  user: MemberType
 }
 
-export interface Member {
+export interface MemberType {
   id: string
   name: string
   profilePictureUrl: string
 }
 
-export interface Conversation {
+export interface ConversationType {
   id: string
   lastMessageDate: string
   lastMessagePreview: string
-  members: Member[]
+  members: MemberType[]
 }
 
-export interface MessageList {
+export interface MessageListType {
   id: string
-  members: Member[]
-  messages: Message[]
+  members: MemberType[]
+  messages: MessageType[]
 }
 
-export interface Theme {
+export interface ThemeType {
   colors: {
     BRAND_PRIMARY: string
     BRAND_SECONDARY: string
@@ -95,4 +96,5 @@ export interface Theme {
   animations: {
     easing: string
   }
+  breakpoints: BreakpointsArray
 }

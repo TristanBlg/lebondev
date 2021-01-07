@@ -4,9 +4,14 @@ import React, {
   useEffect,
   useState,
   useContext,
+  useRef,
 } from "react"
 
 import Input from "../../common/Input"
+import MessageForm from "./components/MessageForm"
+import MessageItem from "./components/MessageItem"
+import MessageHeader from "./components/MessageHeader"
+import ConversationItem from "./components/ConversationItem"
 import * as messageAPI from "../../services/message"
 import * as T from "../../@types/global"
 import {
@@ -16,32 +21,36 @@ import {
   SearchBar,
   ConversationList,
   MessageList,
+  MessageListContainer,
   MessageFooter,
 } from "./styledComponents"
-import MessageForm from "./components/MessageForm"
-import MessageItem from "./components/MessageItem"
-import MessageHeader from "./components/MessageHeader"
-import ConversationItem from "./components/ConversationItem"
 import { LoginContext } from "../../helpers/loginContext"
 
 export default function Chat() {
-  const [conversations, setConversations] = useState<T.Conversation[]>([])
+  // Get the logged in user info
+  const { user } = useContext(LoginContext)
+
+  const [conversations, setConversations] = useState<T.ConversationType[]>()
   const [
     selectedConversation,
     setSelectedConversation,
-  ] = useState<T.MessageList>()
+  ] = useState<T.MessageListType>()
   const [selectedConversationId, setSelectedConversationId] = useState<
-    T.MessageList["id"]
+    T.MessageListType["id"]
   >()
-  const [filterValue, setFilterValue] = useState("")
-  const { user } = useContext(LoginContext)
+
+  const [searchValue, setSearchValue] = useState("")
+
+  const MessageListRef = useRef<HTMLUListElement>(null)
 
   useEffect(() => {
     messageAPI.getConversations().then((response) => {
       setConversations(response)
+
+      // Set the first conversation as default selected conversation
       setSelectedConversationId(response[0].id)
     })
-  }, [filterValue])
+  }, [searchValue])
 
   useEffect(() => {
     if (selectedConversationId) {
@@ -51,31 +60,35 @@ export default function Chat() {
     }
   }, [selectedConversationId])
 
-  const handleFilterChange = useCallback(
+  useEffect(() => {
+    MessageListRef?.current?.scrollIntoView(false)
+  }, [selectedConversation])
+
+  const handleSearchChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
       const {
         target: { value },
       } = event
-      setFilterValue(value)
+      setSearchValue(value)
     },
     []
   )
 
-  const handleConversationClick = (id: T.Conversation["id"]) => () => {
+  const handleConversationClick = (id: T.ConversationType["id"]) => () => {
     setSelectedConversationId(id)
   }
 
   const handleSendMessage = (text: string, isPrivate: boolean) => {
-    messageAPI
-      .sendMessage(user.id, new Date().toISOString(), text, isPrivate)
-      .then((newMessage) => {
-        if (selectedConversation) {
+    if (selectedConversation) {
+      messageAPI
+        .sendMessage(user.id, new Date().toISOString(), text, isPrivate)
+        .then((newMessage) => {
           setSelectedConversation({
             ...selectedConversation,
             messages: [...selectedConversation.messages, newMessage],
           })
-        }
-      })
+        })
+    }
   }
 
   return (
@@ -83,13 +96,13 @@ export default function Chat() {
       <StartBlock>
         <SearchBar>
           <Input
-            onChange={handleFilterChange}
+            onChange={handleSearchChange}
             type="search"
             placeholder="Rechercher un contact"
           />
         </SearchBar>
         <ConversationList>
-          {conversations.map((conversation) => (
+          {conversations?.map((conversation) => (
             <ConversationItem
               key={conversation.id}
               conversation={conversation}
@@ -103,11 +116,13 @@ export default function Chat() {
         {selectedConversation && (
           <MessageHeader conversation={selectedConversation} />
         )}
-        <MessageList>
-          {selectedConversation?.messages?.map((message) => (
-            <MessageItem message={message} key={message.id} />
-          ))}
-        </MessageList>
+        <MessageListContainer>
+          <MessageList ref={MessageListRef}>
+            {selectedConversation?.messages.map((message) => (
+              <MessageItem message={message} key={message.id} />
+            ))}
+          </MessageList>
+        </MessageListContainer>
         <MessageFooter>
           <MessageForm onSubmit={handleSendMessage} />
         </MessageFooter>

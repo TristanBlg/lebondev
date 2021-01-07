@@ -1,5 +1,10 @@
 import styled, { css } from "styled-components"
 
+interface Props {
+  outgoing: boolean
+  isPrivate: boolean
+}
+
 const privateMessage = css`
   color: #ffffff;
   background-color: ${(props) => props.theme.colors.NIGHT["900"]};
@@ -9,7 +14,7 @@ const privateMessage = css`
     filter: blur(0);
   }
 `
-export const Container = styled.div<{ outgoing: boolean; isPrivate: boolean }>`
+export const Container = styled.div<Props>`
   background-color: ${(props) =>
     props.outgoing
       ? props.theme.colors.BRAND_PRIMARY
@@ -17,7 +22,6 @@ export const Container = styled.div<{ outgoing: boolean; isPrivate: boolean }>`
   color: ${(props) => props.outgoing && "#ffffff"};
   padding: 0.5rem 1rem;
   border-radius: 1rem;
-  margin-left: ${(props) => props.outgoing && "auto"};
 
   ${(props) => props.isPrivate && privateMessage}
 `

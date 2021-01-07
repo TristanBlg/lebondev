@@ -1,13 +1,13 @@
 import React from "react"
 
 import Badge from "../../../../common/Badge"
-import * as T from "../../../../@types/global"
+import { MessageListType } from "../../../../@types/global"
 import { Container } from "./styledComponents"
 import { Text } from "../../../../common/StyledText"
 import Box from "../../../../common/Box"
 
 interface Props {
-  conversation: T.MessageList
+  conversation: MessageListType
 }
 
 export default function MessageHeader({ conversation }: Props) {
