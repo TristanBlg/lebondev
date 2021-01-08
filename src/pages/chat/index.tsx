@@ -50,6 +50,12 @@ export default function Chat() {
       // Set the first conversation as default selected conversation
       setSelectedConversationId(response[0].id)
     })
+  }, [])
+
+  useEffect(() => {
+    // messageAPI.getConversations(searchValue).then((response) => {
+    //   setConversations(response)
+    // })
   }, [searchValue])
 
   useEffect(() => {

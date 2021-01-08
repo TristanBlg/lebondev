@@ -1,4 +1,9 @@
-import React, { TextareaHTMLAttributes, useEffect, useRef } from "react"
+import React, {
+  ChangeEvent,
+  TextareaHTMLAttributes,
+  useEffect,
+  useRef,
+} from "react"
 
 import { Textarea as StyledTextarea } from "./styledComponents"
 
@@ -28,7 +33,7 @@ export default function Textarea({
     }
   }, [isSubmitting, minRows])
 
-  const handleChange = (event: any) => {
+  const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     if (onChange) {
       onChange(event)
     }
