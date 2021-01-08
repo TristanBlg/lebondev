@@ -78,8 +78,6 @@ export default function MessageForm({ onSubmit }: Props) {
                       required
                       placeholder="Écrivez votre message"
                       isSubmitting={isSubmitting}
-                      rows={1}
-                      maxRows={6}
                       onKeyDown={onEnterPress}
                       aria-label="enter your message"
                     />
