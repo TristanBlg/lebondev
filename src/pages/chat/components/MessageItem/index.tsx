@@ -13,7 +13,7 @@ interface Props {
 
 export default function MessageItem({ message }: Props) {
   return (
-    <Container key={message.id}>
+    <Container data-testid="message-item" key={message.id}>
       {!message.outgoing && (
         <Box mr="0.5rem">
           <Badge size="small" pictures={[message.member.profilePictureUrl]} />

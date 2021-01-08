@@ -15,6 +15,7 @@ const Input = styled.input`
   left: 0;
   margin: 0;
   border: 0;
+  z-index: 1;
   cursor: pointer;
 `
 
@@ -24,7 +25,7 @@ export default function Checkbox(props: InputHTMLAttributes<HTMLInputElement>) {
   return (
     <Container>
       {props.children}
-      <Input type="checkbox" {...rest} />
+      <Input data-testid="checkbox" type="checkbox" {...rest} />
     </Container>
   )
 }

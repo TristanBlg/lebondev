@@ -4,7 +4,10 @@ import styled, { css } from "styled-components"
 import search from "./search.svg"
 
 const searchInput = css`
-  background: url(${search}) no-repeat left 1rem center / 1rem auto;
+  background-position: left 1rem center;
+  background-size: 1rem auto;
+  background-repeat: no-repeat;
+  background-image: url(${search});
   padding-left: 3rem;
 `
 const Input = styled.input<InputHTMLAttributes<HTMLInputElement>>`
@@ -15,10 +18,9 @@ const Input = styled.input<InputHTMLAttributes<HTMLInputElement>>`
   border-radius: 1.5rem;
   outline: 0;
   font-size: 1rem;
+  background-color: ${(props) => props.theme.colors.NIGHT["100"]};
 
   ${(props) => props.type === "search" && searchInput};
-
-  background-color: ${(props) => props.theme.colors.NIGHT["100"]};
 
   &::placeholder {
     font-size: 1rem;

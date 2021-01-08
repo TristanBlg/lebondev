@@ -18,7 +18,11 @@ export default function ConversationItem({
   onClick,
 }: Props) {
   return (
-    <Container isActive={isActive} onClick={onClick}>
+    <Container
+      data-testid="conversation-item"
+      isActive={isActive}
+      onClick={onClick}
+    >
       <Box flexShrink={0}>
         <Badge
           pictures={conversation.members.map(

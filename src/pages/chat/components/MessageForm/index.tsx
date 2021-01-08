@@ -37,7 +37,7 @@ export default function MessageForm({ onSubmit }: Props) {
       }}
     >
       {({ handleSubmit }) => (
-        <form onSubmit={handleSubmit}>
+        <form data-testid="message-form" onSubmit={handleSubmit}>
           <Box display="flex" alignItems="center">
             <Box mr="0.5rem">
               <Field name="isPrivate">
@@ -45,11 +45,13 @@ export default function MessageForm({ onSubmit }: Props) {
                   <Checkbox {...field} aria-label="private message">
                     {field.value ? (
                       <PrivateIcon
+                        data-testid="private-message-icon"
                         aria-hidden="true"
                         aria-label="Private message"
                       />
                     ) : (
                       <PublicIcon
+                        data-testid="public-message-icon"
                         aria-hidden="true"
                         aria-label="Public message"
                       />

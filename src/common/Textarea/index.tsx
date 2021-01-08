@@ -57,6 +57,7 @@ export default function Textarea({
 
   return (
     <StyledTextarea
+      data-testid="textarea"
       ref={textareaRef}
       cols={30}
       maxLength={1000}

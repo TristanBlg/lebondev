@@ -12,7 +12,7 @@ interface Props {
 
 export default function MessageHeader({ conversation }: Props) {
   return (
-    <Container>
+    <Container data-testid="message-header">
       <Badge
         pictures={conversation.members.map(
           (member) => member.profilePictureUrl
